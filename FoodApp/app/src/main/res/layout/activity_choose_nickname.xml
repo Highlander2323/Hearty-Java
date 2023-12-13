@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_nickname"
+    tools:context=".ChooseNickname">
+
+    <LinearLayout
+        android:id="@+id/form_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/nickname_form_border"
+        android:elevation="20dp"
+        android:layout_margin="10sp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txt_nickname_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="10sp"
+            android:text="@string/nickname_title_text"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/box_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="10sp"
+            android:ems="10"
+            android:hint="@string/btn_nickname_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_nickname_continue"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10sp"
+            android:elevation="15sp"
+            android:background="@drawable/button_border"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="@string/btn_nickname" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

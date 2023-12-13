@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_wooden"
+    tools:context=".AddIngredientsMod">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_recipe"
+        android:background="@drawable/recipe_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal = "10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/add_ingredient_mod_btn_cancel_ingredient"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:background="@drawable/button_back"
+                android:backgroundTint="@color/black" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/add_ingredient_mod_btn_add_ingredient"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:enabled="true"
+                android:background="@drawable/button_save"
+                android:backgroundTint="@color/orange"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/add_ingredient_mod_txt_ing_name"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Ingredient name:"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/add_ingredient_mod_box_ing_name"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:maxLength="50"
+                android:ems="10"
+                android:hint="Name"
+                android:textColorHint="@color/black"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/add_ingredient_mod_txt_ing_fats"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Ingredient fats:"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/add_ingredient_mod_box_ing_fats"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:maxLength="50"
+                android:ems="10"
+                android:hint="0"
+                android:textColorHint="@color/black"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/add_ingredient_mod_txt_ing_protein"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Ingredient protein:"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/add_ingredient_mod_box_ing_protein"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:maxLength="50"
+                android:ems="10"
+                android:hint="0"
+                android:textColorHint="@color/black"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/add_ingredient_mod_txt_ing_carbs"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Ingredient carbs:"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/add_ingredient_mod_box_ing_carbs"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:maxLength="50"
+                android:ems="10"
+                android:hint="0"
+                android:textColorHint="@color/black"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/add_ingredient_mod_txt_ing_sugars"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Ingredient sugars:"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/add_ingredient_mod_box_ing_sugars"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:maxLength="50"
+                android:ems="10"
+                android:hint="0"
+                android:textColorHint="@color/black"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/add_ingredient_mod_txt_ing_calories"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Ingredient calories:"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/add_ingredient_mod_box_ing_calories"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:maxLength="50"
+                android:ems="10"
+                android:hint="0"
+                android:textColorHint="@color/black"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

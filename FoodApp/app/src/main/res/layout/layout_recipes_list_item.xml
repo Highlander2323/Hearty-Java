@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recipe_background"
+    android:id="@+id/search_recipe_item_layout">
+
+
+    <ImageView
+        android:id="@+id/search_recipe_list_item_image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:padding="3dp"
+        android:src="@drawable/carbonara"
+        android:scaleType="fitXY"
+        android:contentDescription="IMAGE"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/search_recipe_list_item_txt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/search_recipe_list_item_txt_cook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/search_recipe_list_item_btn_actions"
+        android:contentDescription="ACTIONS"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/dots"
+        android:background="#00FFFFFF"
+        android:focusable="false"
+        android:clickable="false"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_nickname"
+    tools:context=".CreateRecipe">
+
+
+    <LinearLayout
+        android:id="@+id/linear_layout_search_ingredients"
+        android:background="@drawable/recipe_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linear_layout_added_ingredients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_ingredients_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:background="@drawable/button_back"
+                android:backgroundTint="@color/black" />
+            <TextView
+                android:id="@+id/txt_ingredients_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="24sp"/>
+
+        </LinearLayout>
+
+        <android.widget.SearchView
+            android:id="@+id/ingredients_searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/search_bar_background"
+            android:elevation="10sp"
+            android:iconifiedByDefault="false"
+            android:padding="10dp"
+            android:queryBackground="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <ListView
+            android:id="@+id/ingredients_list_search_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:divider="@null"
+            android:dividerHeight="5dp"
+            android:paddingHorizontal="10dp"
+            android:scrollbars="none" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_added_ingredients"
+        android:background="@drawable/recipe_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal = "10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_search_ingredients">
+
+        <ListView
+            android:id="@+id/ingredients_list_added_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:divider="@null"
+            android:dividerHeight="5dp"
+            android:paddingHorizontal="10dp"
+            android:scrollbars="none" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

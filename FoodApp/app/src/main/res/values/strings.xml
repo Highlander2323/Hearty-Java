@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FoodApp</string>
+    <string name="test_text">This is the main page</string>
+    <string name="recipes">Recipes</string>
+    <string name="cooking">Cooking</string>
+    <string name="scanner">Scanner</string>
+    <string name="cook">Cook</string>
+    <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_signup">SIGN UP</string>
+    <string name="back">BACK TO LOGIN</string>
+    <string name="signup_art">SIGN UP ART</string>
+    <string name="nickname_title_text">CHOOSE A NAME FOR YOUR PROFILE</string>
+    <string name="btn_nickname">CONTINUE</string>
+    <string name="btn_nickname_hint"> BETWEEN 4–24 CHARACTERS</string>
+    <string name="add_cookbook">ADD COOKBOOK</string>
+    <string name="add_recipe">ADD RECIPE</string>
+</resources>
