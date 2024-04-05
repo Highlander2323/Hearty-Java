@@ -18,25 +18,22 @@ class AddIngredients : AppCompatActivity() {
     protected var btnAdd: ImageButton? = null
     protected var btnRemove: ImageButton? = null
     protected var btnBack: Button? = null
-    @JvmField
     var searchBar: SearchView? = null
     protected var idUser = MainActivity.idUser
     protected var info = arrayOf("No results :/")
     protected var connection: Connection? = null
     protected var searchIngredients: ListView? = null
     protected var addedIngredients: ListView? = null
-    @JvmField
     var txtInfo: TextView? = null
 
     // Dialog box for entering amount when adding new ingredient
-    @JvmField
     var dialogAddIngredient = DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
-                val data: MutableMap<String?, String?> = HashMap<Any?, Any?>()
+                val data: MutableMap<String, String> = HashMap()
                 data["Id"] = id
                 data["Name"] = name
-                data["Amount"] = ButtonChecks.boxIngredientAmount.text.toString()
+                data["Amount"] = ButtonChecks.boxIngredientAmount!!.text.toString()
                 CreateRecipe.idIngredients.add(data)
                 searchBar!!.clearFocus()
                 initAddedIngredients()
@@ -136,9 +133,7 @@ class AddIngredients : AppCompatActivity() {
 
     companion object {
         protected var ctx: Context? = null
-        @JvmField
         var id: String? = null
-        @JvmField
         var name: String? = null
     }
 }
