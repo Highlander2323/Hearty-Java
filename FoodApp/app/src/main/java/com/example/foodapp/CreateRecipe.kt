@@ -27,7 +27,7 @@ class CreateRecipe : AppCompatActivity() {
     private lateinit var btnCancel: Button
     private lateinit var btnCreate: Button
     private lateinit var btnIngredients: Button
-    private var idUser: String? = MainActivity.Companion.idUser
+    private var idUser: String? = MainActivity.idUser
     private var connection: Connection? = null
     private lateinit var boxName: EditText
     private lateinit var boxDirections: EditText

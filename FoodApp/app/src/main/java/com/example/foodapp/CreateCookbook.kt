@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import java.sql.PreparedStatement
 
 class CreateCookbook : AppCompatActivity() {
-    protected var idUser: String? = MainActivity.Companion.idUser
+    protected var idUser: String? = MainActivity.idUser
     lateinit private var boxTitle: EditText
     lateinit private var boxDescription: EditText
     lateinit private var btnCreate: Button
@@ -115,19 +115,19 @@ class CreateCookbook : AppCompatActivity() {
         onTextChange(boxTitle)
         btnCancel!!.setOnClickListener { view: View? -> onClickBtnCancel() }
         btnCreate!!.setOnClickListener { view: View? -> onClickBtnCreate() }
-        if (RecipesFragment.Companion.selectedCookbookId != "") {
+        if (RecipesFragment.selectedCookbookId != "") {
             onTextChange(boxDescription)
         }
     }
 
     protected fun onClickBtnCreate() {
-        if (RecipesFragment.Companion.selectedCookbookId != "") {
+        if (RecipesFragment.selectedCookbookId != "") {
             val query = "update dbo.Cookbook set cb_name = ?, cb_description = ? where cb_id = ?"
             try {
-                val ps: PreparedStatement = MainActivity.Companion.connection!!.prepareStatement(query)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
                 ps.setString(1, boxTitle!!.text.toString())
                 ps.setString(2, boxDescription!!.text.toString())
-                ps.setString(3, RecipesFragment.Companion.selectedCookbookId)
+                ps.setString(3, RecipesFragment.selectedCookbookId)
                 ps.execute()
             } catch (e: Exception) {
                 Log.e("DB Error:", e.message!!)
@@ -152,7 +152,7 @@ class CreateCookbook : AppCompatActivity() {
     }
 
     private fun goBack() {
-        if (RecipesFragment.Companion.selectedCookbookId != "") {
+        if (RecipesFragment.selectedCookbookId != "") {
             val prefs = getSharedPreferences("cookbookDetails", MODE_PRIVATE)
             prefs.edit().clear().apply()
             val goBack = Intent(this, CookbookPage::class.java)

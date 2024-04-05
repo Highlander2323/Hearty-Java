@@ -36,7 +36,7 @@ class AddToCookbook : AppCompatActivity() {
                 val query = "select * from [LinkCookbookRecipe] where link_recipe_id = ? and" +
                         " link_cb_id = ?"
                 val ps = connection!!.prepareStatement(query)
-                ps.setString(1, SearchFragment.Companion.selectedRecipeId)
+                ps.setString(1, SearchFragment.selectedRecipeId)
                 ps.setString(2, selectedCookbookId)
                 val rs = ps.executeQuery()
                 if (!rs.next()) {
@@ -56,7 +56,7 @@ class AddToCookbook : AppCompatActivity() {
         try {
             val query = "insert into [LinkCookbookRecipe] values (?,?)"
             val ps = connection!!.prepareStatement(query)
-            ps.setString(1, SearchFragment.Companion.selectedRecipeId)
+            ps.setString(1, SearchFragment.selectedRecipeId)
             ps.setString(2, selectedCookbookId)
             ps.execute()
         } catch (e: Exception) {
@@ -64,7 +64,7 @@ class AddToCookbook : AppCompatActivity() {
         }
         selectedCookbookId = ""
         selectedCookbookPos = -1
-        SearchFragment.Companion.selectedRecipeId = ""
+        SearchFragment.selectedRecipeId = ""
         Toast.makeText(this, "Added to cookbook", Toast.LENGTH_SHORT).show()
         goBack()
     }
@@ -72,7 +72,7 @@ class AddToCookbook : AppCompatActivity() {
     protected fun cancelAddToCookBook() {
         selectedCookbookId = ""
         selectedCookbookPos = -1
-        SearchFragment.Companion.selectedRecipeId = ""
+        SearchFragment.selectedRecipeId = ""
         goBack()
     }
 
@@ -82,7 +82,7 @@ class AddToCookbook : AppCompatActivity() {
             if (connection != null) {
                 val query = "select cb_id, cb_name from [Cookbook] where cb_account_id = ?"
                 val ps = connection!!.prepareStatement(query)
-                ps.setString(1, MainActivity.Companion.idUser)
+                ps.setString(1, MainActivity.idUser)
                 val rs = ps.executeQuery()
                 while (rs.next()) {
                     val dtrecipe: MutableMap<String?, String?> = HashMap()
@@ -96,14 +96,14 @@ class AddToCookbook : AppCompatActivity() {
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
-        val adapter = ListAdapter(this, data, ListAdapter.Companion.ADD_TO_COOKBOOK, connection)
+        val adapter = ListAdapter(this, data, ListAdapter.ADD_TO_COOKBOOK, connection)
         listCookbooks!!.adapter = adapter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_to_cookbook)
-        connection = MainActivity.Companion.connection
+        connection = MainActivity.connection
         initViews()
         setOnClickViews()
     }

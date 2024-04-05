@@ -15,22 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import java.sql.PreparedStatement
 
 class RecipePage : AppCompatActivity() {
-    var txtRecipeName: TextView? = null
-    var txtRecipeCookTime: TextView? = null
-    var txtRecipePrepTime: TextView? = null
-    var txtRecipeDirections: TextView? = null
-    var txtRecipeServings: TextView? = null
-    var btnBack: Button? = null
-    var btnFav: ImageButton? = null
-    var ingredients: ListView? = null
+    lateinit var txtRecipeName: TextView
+    lateinit var txtRecipeCookTime: TextView
+    lateinit var txtRecipePrepTime: TextView
+    lateinit  var txtRecipeDirections: TextView
+    lateinit var txtRecipeServings: TextView
+    lateinit var btnBack: Button
+    lateinit var btnFav: ImageButton
+    lateinit var ingredients: ListView
     var isFav = false
-    private fun changeStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val window = this.window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = resources.getColor(R.color.black)
-        }
-    }
 
     protected fun initViews() {
         btnBack = findViewById(R.id.recipe_page_btn_back)
@@ -50,10 +43,10 @@ class RecipePage : AppCompatActivity() {
 
     protected fun setTextViews() {
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 val query = "select * from [Recipe] where recipe_id = ?"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
-                ps.setString(1, SearchFragment.Companion.selectedRecipeId)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
+                ps.setString(1, SearchFragment.selectedRecipeId)
                 val rs = ps.executeQuery()
                 rs.next()
                 txtRecipeName!!.text = rs.getString("recipe_name")
@@ -115,9 +108,9 @@ class RecipePage : AppCompatActivity() {
             isFav = true
         }
         try {
-            val ps: PreparedStatement = MainActivity.Companion.connection!!.prepareStatement(query)
-            ps.setString(1, MainActivity.Companion.idUser)
-            ps.setString(2, SearchFragment.Companion.selectedRecipeId)
+            val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
+            ps.setString(1, MainActivity.idUser)
+            ps.setString(2, SearchFragment.selectedRecipeId)
             ps.execute()
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
@@ -127,12 +120,12 @@ class RecipePage : AppCompatActivity() {
     private fun setFavoriteBtn() {
         isFav = false
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 val query = "select * from [Favorites] where fav_account_id = ? and" +
                         " fav_recipe_id = ?"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
-                ps.setString(1, MainActivity.Companion.idUser)
-                ps.setString(2, SearchFragment.Companion.selectedRecipeId)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
+                ps.setString(1, MainActivity.idUser)
+                ps.setString(2, SearchFragment.selectedRecipeId)
                 val rs = ps.executeQuery()
                 if (rs.next()) {
                     isFav = true
@@ -151,13 +144,13 @@ class RecipePage : AppCompatActivity() {
     private fun setListView() {
         val data: MutableList<Map<String?, String?>> = ArrayList()
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 val query = "select RecipeIngredient.link_amount, Ingredient.ing_name," +
                         " Ingredient.ing_id from [RecipeIngredient] INNER JOIN [Ingredient] ON" +
                         " RecipeIngredient.link_ing_id = Ingredient.ing_id where" +
                         " RecipeIngredient.link_recipe_id = ?"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
-                ps.setString(1, SearchFragment.Companion.selectedRecipeId)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
+                ps.setString(1, SearchFragment.selectedRecipeId)
                 val rs = ps.executeQuery()
                 while (rs.next()) {
                     val map: MutableMap<String?, String?> = HashMap()
@@ -172,19 +165,19 @@ class RecipePage : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("ERROR", e.message!!)
         }
-        val adapter = ListAdapter(this, data, ListAdapter.Companion.RECIPE_PAGE_INGREDIENTS)
+        val adapter = ListAdapter(this, data, ListAdapter.RECIPE_PAGE_INGREDIENTS)
         ingredients!!.adapter = adapter
     }
 
     private fun initSelectedRecipeId() {
-        if (CookbookPage.Companion.selectedRecipeId !== "") {
-            SearchFragment.Companion.selectedRecipeId = CookbookPage.Companion.selectedRecipeId
+        if (CookbookPage.selectedRecipeId !== "") {
+            SearchFragment.selectedRecipeId = CookbookPage.selectedRecipeId
         }
     }
 
     private fun goBack() {
-        SearchFragment.Companion.selectedRecipeId = ""
-        CookbookPage.Companion.selectedRecipeId = ""
+        SearchFragment.selectedRecipeId = ""
+        CookbookPage.selectedRecipeId = ""
         finish()
     }
 
@@ -197,14 +190,13 @@ class RecipePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_page)
         try {
-            if (MainActivity.Companion.connection!!.isClosed()) {
+            if (MainActivity.connection!!.isClosed()) {
                 val con = ConnectionDB()
-                MainActivity.Companion.connection = con.connect()
+                MainActivity.connection = con.connect()
             }
         } catch (e: Exception) {
             Log.e("ERROR DB", e.message!!)
         }
-        changeStatusBarColor()
         initSelectedRecipeId()
         initViews()
         setOnClickViews()

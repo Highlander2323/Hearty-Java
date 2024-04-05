@@ -15,15 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import java.sql.Connection
 
 class AddIngredients : AppCompatActivity() {
-    protected var btnAdd: ImageButton? = null
-    protected var btnRemove: ImageButton? = null
-    protected var btnBack: Button? = null
+    private lateinit var btnAdd: ImageButton
+    private lateinit var btnRemove: ImageButton
+    private lateinit var btnBack: Button
     var searchBar: SearchView? = null
-    protected var idUser = MainActivity.idUser
-    protected var info = arrayOf("No results :/")
-    protected var connection: Connection? = null
-    protected var searchIngredients: ListView? = null
-    protected var addedIngredients: ListView? = null
+    private var idUser = MainActivity.idUser
+    private var info = arrayOf("No results :/")
+    private var connection: Connection? = null
+    private var searchIngredients: ListView? = null
+    private var addedIngredients: ListView? = null
     var txtInfo: TextView? = null
 
     // Dialog box for entering amount when adding new ingredient

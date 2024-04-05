@@ -76,7 +76,7 @@ class CookingFragment : Fragment() {
 
         // If connection is not established, establish it inside the fragment;
         // If connection is not established, establish it inside the fragment;
-        connection = MainActivity.Companion.connection
+        connection = MainActivity.connection
         try {
             if (connection!!.isClosed) {
                 val con = ConnectionDB()
@@ -109,7 +109,7 @@ class CookingFragment : Fragment() {
         }
 
         fun initListRecipes(data: List<Map<String?, String?>>) {
-            val adapter = ListAdapter(main, data, ListAdapter.Companion.RECIPE_SEARCH, MainActivity.Companion.connection)
+            val adapter = ListAdapter(main, data, ListAdapter.RECIPE_SEARCH, MainActivity.connection)
             listRecipes!!.adapter = adapter
         }
     }

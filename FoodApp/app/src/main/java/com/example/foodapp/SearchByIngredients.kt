@@ -64,9 +64,9 @@ class SearchByIngredients : AppCompatActivity() {
 
     private fun searchRecipe() {
         val data: MutableList<Map<String?, String?>> = ArrayList()
-        CookingFragment.Companion.txtCook!!.setText("")
+        CookingFragment.txtCook!!.setText("")
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 var query = "select R.recipe_id, R.recipe_name, R.recipe_cook_time from Recipe R" +
                         " join RecipeIngredient RI on RI.link_recipe_id = R.recipe_id" +
                         " where RI.link_ing_id in ("
@@ -75,7 +75,7 @@ class SearchByIngredients : AppCompatActivity() {
                 }
                 query += " ?) group by R.recipe_id, R.recipe_name, R.recipe_cook_time" +
                         " having count(*) = ?"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
                 for (i in 1..idIngredients.size) {
                     ps.setString(i, idIngredients[i - 1]["Id"])
                 }
@@ -93,7 +93,7 @@ class SearchByIngredients : AppCompatActivity() {
                     dtrecipe["Cook Time"] = rs.getString("recipe_cook_time")
                     data.add(dtrecipe)
                 } while (rs.next())
-                CookingFragment.Companion.initListRecipes(data)
+                CookingFragment.initListRecipes(data)
             } else {
                 Toast.makeText(this, "Error: Failed to connect to DB", Toast.LENGTH_LONG).show()
             }
@@ -104,7 +104,7 @@ class SearchByIngredients : AppCompatActivity() {
     }
 
     fun initAddedIngredients() {
-        val adapter = ListAdapter(this, idIngredients, ListAdapter.Companion.ADDED_INGREDIENTS)
+        val adapter = ListAdapter(this, idIngredients, ListAdapter.ADDED_INGREDIENTS)
         listAddedIngredients!!.adapter = adapter
     }
 
@@ -113,10 +113,10 @@ class SearchByIngredients : AppCompatActivity() {
         listSearchedIngredients!!.adapter = null
         val data: MutableList<Map<String?, String?>> = ArrayList()
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 val query = "select ing_id,ing_name from [Ingredient] where ing_name like ?" +
                         " order by ing_name offset 0 rows fetch next 15 rows only"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
                 ps.setString(1, "%$search%")
                 val rs = ps.executeQuery()
                 if (!rs.next()) {
@@ -136,7 +136,7 @@ class SearchByIngredients : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("DB ERROR", e.message!!)
         }
-        val adapter = ListAdapter(this, data, ListAdapter.Companion.SEARCHED_INGREDIENTS)
+        val adapter = ListAdapter(this, data, ListAdapter.SEARCHED_INGREDIENTS)
         listSearchedIngredients!!.adapter = adapter
     }
 

@@ -65,7 +65,7 @@ class CookbookPage : AppCompatActivity() {
         })
 
         // If the cookbook page is for the favorites, don't make the Action button invisible
-        if (RecipesFragment.Companion.selectedCookbookId != "") {
+        if (RecipesFragment.selectedCookbookId != "") {
             btnActions.setOnClickListener { view: View? -> onActionsClick() }
         } else {
             btnActions.visibility = View.INVISIBLE
@@ -115,7 +115,7 @@ class CookbookPage : AppCompatActivity() {
             finish()
             return
         }
-        RecipesFragment.Companion.selectedCookbookId = ""
+        RecipesFragment.selectedCookbookId = ""
         recipesAdapter = null
         val main = Intent(this, MainActivity::class.java)
         startActivity(main)
@@ -161,7 +161,7 @@ class CookbookPage : AppCompatActivity() {
                 if (isFavorites || isMyRecipes) {
                     ps.setString(1, MainActivity.idUser)
                 } else {
-                    ps.setString(1, RecipesFragment.Companion.selectedCookbookId)
+                    ps.setString(1, RecipesFragment.selectedCookbookId)
                 }
                 val rs = ps.executeQuery()
                 while (rs.next()) {

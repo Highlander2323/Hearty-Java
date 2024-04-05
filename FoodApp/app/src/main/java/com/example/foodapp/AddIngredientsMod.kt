@@ -37,7 +37,7 @@ class AddIngredientsMod : AppCompatActivity() {
     private fun onClickAdd() {
         val query = "insert into [Ingredient] values (?,?,?,?,?,?)"
         try {
-            val ps: PreparedStatement = MainActivity.Companion.connection!!.prepareStatement(query)
+            val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
             ps.setString(1, boxName!!.text.toString())
             ps.setString(2, boxFats!!.text.toString())
             ps.setString(3, boxProtein!!.text.toString())
@@ -59,9 +59,9 @@ class AddIngredientsMod : AppCompatActivity() {
 
     private fun checkConnection() {
         try {
-            if (MainActivity.Companion.connection!!.isClosed() || MainActivity.Companion.connection == null) {
+            if (MainActivity.connection!!.isClosed() || MainActivity.connection == null) {
                 val con = ConnectionDB()
-                MainActivity.Companion.connection = con.connect()
+                MainActivity.connection = con.connect()
             }
         } catch (e: Exception) {
             Log.e("DB ERROR: ", e.message!!)

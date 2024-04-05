@@ -21,11 +21,10 @@ import java.sql.Connection
 
 open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>, private val option: Int) : BaseAdapter() {
     var connection: Connection? = null
-    var data: Array<Array<String?>>
-    var inflater: LayoutInflater
+    lateinit var data: Array<Array<String?>>
+    var inflater: LayoutInflater = LayoutInflater.from(context)
 
     init {
-        inflater = LayoutInflater.from(context)
         when (option) {
             RECIPES_IN_COOKBOOK, RECIPE_SEARCH -> {
                 data = Array(list.size) { arrayOfNulls(3) }
@@ -98,7 +97,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
 
     protected fun isAdded(id: String?): Boolean {
         for (i in CreateRecipe.idIngredients.indices) {
-            if (CreateRecipe.idIngredients[i].get("Id") === id) {
+            if (CreateRecipe.idIngredients[i]["Id"] === id) {
                 return true
             }
         }
@@ -107,7 +106,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
 
     protected fun isAddedToSearchedIngredients(id: String?): Boolean {
         for (i in SearchByIngredients.idIngredients.indices) {
-            if (SearchByIngredients.idIngredients.get(i).get("Id") === id) {
+            if (SearchByIngredients.idIngredients[i]["Id"] === id) {
                 return true
             }
         }
@@ -122,7 +121,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
         message = "Recipe removed!"
         try {
             val ps = connection!!.prepareStatement(query)
-            ps.setString(1, RecipesFragment.Companion.selectedCookbookId)
+            ps.setString(1, RecipesFragment.selectedCookbookId)
             ps.setString(2, data[pos][0])
             ps.execute()
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -172,7 +171,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
         }
         try {
             val ps = connection!!.prepareStatement(query)
-            ps.setString(1, MainActivity.Companion.idUser)
+            ps.setString(1, MainActivity.idUser)
             ps.setString(2, data[pos][0])
             ps.execute()
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -182,7 +181,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
         }
 
         // If it is the Favorites page, we refresh the activity
-        if (RecipesFragment.Companion.selectedCookbookId == "") {
+        if (RecipesFragment.selectedCookbookId == "") {
             try {
                 val cp = context as CookbookPage?
                 cp!!.recreate()
@@ -202,7 +201,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 val query = "select * from [Favorites] where fav_account_id = ? and" +
                         " fav_recipe_id = ?"
                 val ps = connection!!.prepareStatement(query)
-                ps.setString(1, MainActivity.Companion.idUser)
+                ps.setString(1, MainActivity.idUser)
                 ps.setString(2, data[pos][0])
                 val rs = ps.executeQuery()
                 if (rs.next()) {
@@ -217,7 +216,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.search_recipe_add_to_cookbook -> {
-                    SearchFragment.Companion.selectedRecipeId = data[pos][0]
+                    SearchFragment.selectedRecipeId = data[pos][0]
                     val goToAddToCookbook = Intent(context, AddToCookbook::class.java)
                     context!!.startActivity(goToAddToCookbook)
                 }
@@ -241,7 +240,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 val query = "select * from [Favorites] where fav_account_id = ? and" +
                         " fav_recipe_id = ?"
                 val ps = connection!!.prepareStatement(query)
-                ps.setString(1, MainActivity.Companion.idUser)
+                ps.setString(1, MainActivity.idUser)
                 ps.setString(2, data[pos][0])
                 val rs = ps.executeQuery()
                 if (rs.next()) {
@@ -294,7 +293,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 // Add on click for each list view item;
                 val recipeItem = convertView.findViewById<LinearLayout>(R.id.search_recipe_item_layout)
                 recipeItem.setOnClickListener { view: View? ->
-                    SearchFragment.Companion.selectedRecipeId = data[pos][0]
+                    SearchFragment.selectedRecipeId = data[pos][0]
                     val goToRecipePage = Intent(context, RecipePage::class.java)
                     context!!.startActivity(goToRecipePage)
                 }
@@ -336,7 +335,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 val dialogEditAmount = DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
-                            CreateRecipe.Companion.idIngredients.get(pos).put("Amount",
+                            CreateRecipe.idIngredients.get(pos).put("Amount",
                                     ButtonChecks.boxIngredientAmount!!.text.toString())
                             ingActivity!!.searchBar!!.clearFocus()
                             ingActivity.initAddedIngredients()
@@ -358,7 +357,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 // Add functionality for the remove button
                 val btnRemove = convertView.findViewById<ImageButton>(R.id.btn_added_ingredient_remove)
                 btnRemove.setOnClickListener { view: View? ->
-                    CreateRecipe.Companion.idIngredients.removeAt(pos)
+                    CreateRecipe.idIngredients.removeAt(pos)
                     ingActivity!!.initAddedIngredients()
                 }
             }
@@ -369,20 +368,20 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 txtCookbookName.text = data[pos][1]
                 val item = convertView.findViewById<LinearLayout>(R.id.layout_add_to_cookbook_item)
                 item.setOnClickListener { view: View? ->
-                    if (AddToCookbook.Companion.selectedCookbookId == "") {
+                    if (AddToCookbook.selectedCookbookId == "") {
                         txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
-                        AddToCookbook.Companion.selectedCookbookId = data[pos][0]
-                        AddToCookbook.Companion.selectedCookbookPos = pos
+                        AddToCookbook.selectedCookbookId = data[pos][0]
+                        AddToCookbook.selectedCookbookPos = pos
                     } else {
-                        val lastSelectedItem = parent.getChildAt(AddToCookbook.Companion.selectedCookbookPos)
+                        val lastSelectedItem = parent.getChildAt(AddToCookbook.selectedCookbookPos)
                         val lastSelectedItemName = lastSelectedItem.findViewById<TextView>(R.id.txt_add_to_cookbook_item)
                         lastSelectedItemName.setTextColor(ContextCompat.getColor(context!!, R.color.black))
                         txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
-                        AddToCookbook.Companion.selectedCookbookId = data[pos][0]
-                        AddToCookbook.Companion.selectedCookbookPos = pos
+                        AddToCookbook.selectedCookbookId = data[pos][0]
+                        AddToCookbook.selectedCookbookPos = pos
                     }
-                    AddToCookbook.Companion.btnSave!!.setEnabled(true)
-                    AddToCookbook.Companion.btnSave!!.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(
+                    AddToCookbook.btnSave!!.setEnabled(true)
+                    AddToCookbook.btnSave!!.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(
                             context!!, R.color.orange)))
                 }
             }
@@ -401,7 +400,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 txtCookbookName.text = data[pos][1]
                 val cookbookItem = convertView.findViewById<LinearLayout>(R.id.layout_cookbook_list_item)
                 cookbookItem.setOnClickListener { view: View? ->
-                    RecipesFragment.Companion.selectedCookbookId = data[pos][0]
+                    RecipesFragment.selectedCookbookId = data[pos][0]
                     val goToCookbookPage = Intent(context, CookbookPage::class.java)
                     context!!.startActivity(goToCookbookPage)
                     val act = MainActivity()
@@ -419,9 +418,9 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 time += (data[pos][2]!!.toInt() % 60).toString() + "m"
                 txtRecipeCooktime.text = time
                 val btnMenu = convertView.findViewById<ImageButton>(R.id.search_recipe_list_item_btn_actions)
-                if (RecipesFragment.Companion.selectedCookbookId != "") {
+                if (RecipesFragment.selectedCookbookId != "") {
                     btnMenu.setOnClickListener { view: View? -> recipesCookbookBtnMenuActions(btnMenu, pos) }
-                } else if (Profile.Companion.isActive) {
+                } else if (Profile.isActive) {
                     btnMenu.setImageResource(R.drawable.button_remove_item)
                     btnMenu.setOnClickListener { view: View? -> removeRecipe(pos) }
                 } else {
@@ -430,7 +429,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 }
                 val itemRecipe = convertView.findViewById<LinearLayout>(R.id.search_recipe_item_layout)
                 itemRecipe.setOnClickListener { view: View? ->
-                    CookbookPage.Companion.selectedRecipeId = data[pos][0]
+                    CookbookPage.selectedRecipeId = data[pos][0]
                     val goToRecipePage = Intent(context, RecipePage::class.java)
                     context!!.startActivity(goToRecipePage)
                 }
@@ -450,10 +449,10 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                         searchedIngredients.txtInfo!!.text = "Ingredient already added!"
                         return@setOnClickListener
                     }
-                    val map: MutableMap<String?, String?> = HashMap<Any?, Any?>()
+                    val map: MutableMap<String?, String?> = HashMap()
                     map["Id"] = data[pos][0]
                     map["Name"] = data[pos][1]
-                    SearchByIngredients.Companion.idIngredients.add(map)
+                    SearchByIngredients.idIngredients.add(map)
                     searchedIngredients.initAddedIngredients()
                     searchedIngredients.checkIngredients()
                 }
@@ -467,7 +466,7 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 // Add functionality for the remove button
                 val btnRemove = convertView.findViewById<ImageButton>(R.id.search_by_ingredients_btn_ingredient_remove)
                 btnRemove.setOnClickListener { view: View? ->
-                    SearchByIngredients.Companion.idIngredients.removeAt(pos)
+                    SearchByIngredients.idIngredients.removeAt(pos)
                     ingActivity!!.initAddedIngredients()
                     ingActivity.checkIngredients()
                 }
@@ -479,20 +478,20 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 txtCookbookName.text = data[pos][1]
                 val item = convertView.findViewById<LinearLayout>(R.id.layout_add_to_cookbook_item)
                 item.setOnClickListener { view: View? ->
-                    if (SearchByDiet.Companion.selectedDietId == "") {
+                    if (SearchByDiet.selectedDietId == "") {
                         txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
-                        SearchByDiet.Companion.selectedDietId = data[pos][0]
-                        SearchByDiet.Companion.selectedDietPos = pos
+                        SearchByDiet.selectedDietId = data[pos][0]
+                        SearchByDiet.selectedDietPos = pos
                     } else {
-                        val lastSelectedItem = parent.getChildAt(SearchByDiet.Companion.selectedDietPos)
+                        val lastSelectedItem = parent.getChildAt(SearchByDiet.selectedDietPos)
                         val lastSelectedItemName = lastSelectedItem.findViewById<TextView>(R.id.txt_add_to_cookbook_item)
                         lastSelectedItemName.setTextColor(ContextCompat.getColor(context!!, R.color.black))
                         txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
-                        SearchByDiet.Companion.selectedDietId = data[pos][0]
-                        SearchByDiet.Companion.selectedDietPos = pos
+                        SearchByDiet.selectedDietId = data[pos][0]
+                        SearchByDiet.selectedDietPos = pos
                     }
-                    SearchByDiet.Companion.btnSave!!.setEnabled(true)
-                    SearchByDiet.Companion.btnSave!!.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(
+                    SearchByDiet.btnSave!!.setEnabled(true)
+                    SearchByDiet.btnSave!!.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(
                             context!!, R.color.orange)))
                 }
             }

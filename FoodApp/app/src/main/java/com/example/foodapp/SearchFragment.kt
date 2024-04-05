@@ -77,11 +77,11 @@ class SearchFragment : Fragment() {
     private fun setListView(name: String) {
         val data: MutableList<Map<String?, String?>> = ArrayList()
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 val query = "select recipe_id,recipe_name,recipe_cook_time from [Recipe] where" +
                         " recipe_name like ? order by recipe_name offset 0 rows fetch next 15 rows " +
                         "only"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
                 ps.setString(1, "%$name%")
                 val rs = ps.executeQuery()
                 if (!rs.next()) {
@@ -105,7 +105,7 @@ class SearchFragment : Fragment() {
             Toast.makeText(main, e.message, Toast.LENGTH_LONG).show()
             Log.e("ERROR", e.message!!)
         }
-        val adapter = ListAdapter(activity, data, ListAdapter.Companion.RECIPE_SEARCH, MainActivity.Companion.connection)
+        val adapter = ListAdapter(activity, data, ListAdapter.RECIPE_SEARCH, MainActivity.connection)
         recipes!!.adapter = adapter
     }
 
@@ -114,9 +114,9 @@ class SearchFragment : Fragment() {
 
         // If connection is not established, establish it inside the fragment;
         try {
-            if (MainActivity.Companion.connection!!.isClosed()) {
+            if (MainActivity.connection!!.isClosed()) {
                 val con = ConnectionDB()
-                MainActivity.Companion.connection = con.connect()
+                MainActivity.connection = con.connect()
             }
         } catch (e: Exception) {
             Log.e("ERROR DB", e.message!!)

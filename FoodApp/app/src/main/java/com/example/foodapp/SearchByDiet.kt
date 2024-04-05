@@ -49,15 +49,15 @@ class SearchByDiet : AppCompatActivity() {
 
     private fun searchRecipes() {
         val data: MutableList<Map<String?, String?>> = ArrayList()
-        CookingFragment.Companion.txtCook!!.setText("")
+        CookingFragment.txtCook!!.setText("")
         try {
-            if (MainActivity.Companion.connection != null) {
+            if (MainActivity.connection != null) {
                 val query = "select R.recipe_id, R.recipe_name, R.recipe_cook_time from Recipe R" +
                         " join DietRecipeLink DRL on DRL.link_recipe_id = R.recipe_id" +
                         " where DRL.link_diet_id = ? and R.recipe_name like ?" +
                         " order by R.recipe_name offset 0 rows fetch next 30 rows " +
                         "only"
-                val ps: PreparedStatement = MainActivity.Companion.connection.prepareStatement(query)
+                val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
                 ps.setString(1, selectedDietId)
                 ps.setString(2, "%" + searchedRecipeName + "%")
                 val rs = ps.executeQuery()
@@ -79,7 +79,7 @@ class SearchByDiet : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("DB ERROR", e.message!!)
         }
-        CookingFragment.Companion.initListRecipes(data)
+        CookingFragment.initListRecipes(data)
         goBack()
     }
 
@@ -87,7 +87,7 @@ class SearchByDiet : AppCompatActivity() {
         val data: MutableList<Map<String?, String?>> = ArrayList()
         try {
             val query = "select diet_id, diet_name from [Diet]"
-            val ps: PreparedStatement = MainActivity.Companion.connection!!.prepareStatement(query)
+            val ps: PreparedStatement = MainActivity.connection!!.prepareStatement(query)
             val rs = ps.executeQuery()
             while (rs.next()) {
                 val map: MutableMap<String?, String?> = HashMap()
@@ -99,7 +99,7 @@ class SearchByDiet : AppCompatActivity() {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             Log.e("DB ERROR", e.message!!)
         }
-        val adapter = ListAdapter(this, data, ListAdapter.Companion.SEARCHED_DIETS)
+        val adapter = ListAdapter(this, data, ListAdapter.SEARCHED_DIETS)
         listDiets!!.adapter = adapter
     }
 
