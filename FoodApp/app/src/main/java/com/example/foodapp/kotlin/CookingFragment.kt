@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Intent
 import android.os.Build
@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.foodapp.R
 import java.sql.Connection
 
 /**
@@ -51,8 +52,8 @@ class CookingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
+            mParam1 = requireArguments().getString(ARG_PARAM1)
+            mParam2 = requireArguments().getString(ARG_PARAM2)
         }
     }
 

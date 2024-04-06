@@ -1,17 +1,16 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
-import android.os.Build
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.foodapp.R
 import java.sql.PreparedStatement
 
 class RecipePage : AppCompatActivity() {
@@ -76,8 +75,8 @@ class RecipePage : AppCompatActivity() {
                     cookTime += "0"
                 }
                 cookTime += cook % 60
-                txtRecipeCookTime!!.text = cookTime
-                txtRecipeServings!!.text = rs.getString("recipe_servings")
+                txtRecipeCookTime.text = cookTime
+                txtRecipeServings.text = rs.getString("recipe_servings")
             }
         } catch (e: Exception) {
             Log.e("DB Error", e.message!!)
@@ -85,9 +84,9 @@ class RecipePage : AppCompatActivity() {
     }
 
     protected fun setOnClickViews() {
-        btnBack!!.setOnClickListener { view: View? -> goBack() }
+        btnBack.setOnClickListener { view: View? -> goBack() }
         setListView()
-        btnFav!!.setOnClickListener { view: View? -> setOnClickFav() }
+        btnFav.setOnClickListener { view: View? -> setOnClickFav() }
     }
 
     private fun setOnClickFav() {
@@ -98,13 +97,13 @@ class RecipePage : AppCompatActivity() {
                     "fav_recipe_id = ?"
             clickMessage.setText("Recipe removed!")
             clickMessage.show()
-            btnFav!!.setImageResource(R.drawable.fav_unchecked)
+            btnFav.setImageResource(R.drawable.fav_unchecked)
             isFav = false
         } else {
             query = "insert into [Favorites] values (?,?)"
             clickMessage.setText("Recipe added!")
             clickMessage.show()
-            btnFav!!.setImageResource(R.drawable.fav_checked)
+            btnFav.setImageResource(R.drawable.fav_checked)
             isFav = true
         }
         try {

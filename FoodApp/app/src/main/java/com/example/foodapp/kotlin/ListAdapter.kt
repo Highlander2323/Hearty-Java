@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Context
 import android.content.DialogInterface
@@ -17,6 +17,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.foodapp.R
 import java.sql.Connection
 
 open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>, private val option: Int) : BaseAdapter() {
@@ -346,12 +347,16 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 }
                 // Edit amount when clicking text
                 txtAmount.setOnClickListener { view: View? ->
-                    ButtonChecks.ingredientsAmountEdit(context,
-                            dialogEditAmount, data[pos][2]!!.toInt())
+                    ButtonChecks.ingredientsAmountEdit(
+                        context,
+                        dialogEditAmount, data[pos][2]!!.toInt()
+                    )
                 }
                 editBtn.setOnClickListener { view: View? ->
-                    ButtonChecks.ingredientsAmountEdit(context,
-                            dialogEditAmount, data[pos][2]!!.toInt())
+                    ButtonChecks.ingredientsAmountEdit(
+                        context,
+                        dialogEditAmount, data[pos][2]!!.toInt()
+                    )
                 }
 
                 // Add functionality for the remove button
@@ -369,20 +374,27 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 val item = convertView.findViewById<LinearLayout>(R.id.layout_add_to_cookbook_item)
                 item.setOnClickListener { view: View? ->
                     if (AddToCookbook.selectedCookbookId == "") {
-                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
+                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!,
+                            R.color.orange
+                        ))
                         AddToCookbook.selectedCookbookId = data[pos][0]
                         AddToCookbook.selectedCookbookPos = pos
                     } else {
                         val lastSelectedItem = parent.getChildAt(AddToCookbook.selectedCookbookPos)
                         val lastSelectedItemName = lastSelectedItem.findViewById<TextView>(R.id.txt_add_to_cookbook_item)
-                        lastSelectedItemName.setTextColor(ContextCompat.getColor(context!!, R.color.black))
-                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
+                        lastSelectedItemName.setTextColor(ContextCompat.getColor(context!!,
+                            R.color.black
+                        ))
+                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!,
+                            R.color.orange
+                        ))
                         AddToCookbook.selectedCookbookId = data[pos][0]
                         AddToCookbook.selectedCookbookPos = pos
                     }
                     AddToCookbook.btnSave!!.setEnabled(true)
                     AddToCookbook.btnSave!!.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(
-                            context!!, R.color.orange)))
+                            context!!, R.color.orange
+                    )))
                 }
             }
 
@@ -479,20 +491,27 @@ open class ListAdapter(var context: Context?, list: List<Map<String?, String?>>,
                 val item = convertView.findViewById<LinearLayout>(R.id.layout_add_to_cookbook_item)
                 item.setOnClickListener { view: View? ->
                     if (SearchByDiet.selectedDietId == "") {
-                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
+                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!,
+                            R.color.orange
+                        ))
                         SearchByDiet.selectedDietId = data[pos][0]
                         SearchByDiet.selectedDietPos = pos
                     } else {
                         val lastSelectedItem = parent.getChildAt(SearchByDiet.selectedDietPos)
                         val lastSelectedItemName = lastSelectedItem.findViewById<TextView>(R.id.txt_add_to_cookbook_item)
-                        lastSelectedItemName.setTextColor(ContextCompat.getColor(context!!, R.color.black))
-                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!, R.color.orange))
+                        lastSelectedItemName.setTextColor(ContextCompat.getColor(context!!,
+                            R.color.black
+                        ))
+                        txtCookbookName.setTextColor(ContextCompat.getColor(context!!,
+                            R.color.orange
+                        ))
                         SearchByDiet.selectedDietId = data[pos][0]
                         SearchByDiet.selectedDietPos = pos
                     }
                     SearchByDiet.btnSave!!.setEnabled(true)
                     SearchByDiet.btnSave!!.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(
-                            context!!, R.color.orange)))
+                            context!!, R.color.orange
+                    )))
                 }
             }
         }

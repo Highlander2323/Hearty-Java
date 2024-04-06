@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CookingFragment">
+    tools:context=".kotlin.CookingFragment">
     <ListView
         android:id="@+id/cooking_fragment_recipes_list"
         android:layout_width="match_parent"

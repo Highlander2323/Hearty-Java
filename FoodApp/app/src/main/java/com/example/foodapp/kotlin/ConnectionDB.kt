@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.annotation.SuppressLint
 import android.os.StrictMode

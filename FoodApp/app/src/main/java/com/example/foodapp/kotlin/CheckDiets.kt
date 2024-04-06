@@ -1,10 +1,10 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.util.Log
 import java.sql.Connection
 import java.sql.PreparedStatement
 
-class CheckDiets(var idIngredients: List<MutableMap<String, String>>, var connection: Connection?, var servings: Int, var idRecipe: String) {
+class CheckDiets(var idIngredients: List<MutableMap<String?, String?>>, var connection: Connection?, var servings: Int, var idRecipe: String) {
     var fatsTotal = 0f
     var carbsTotal = 0f
     var proteinTotal = 0f

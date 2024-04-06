@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.foodapp.R
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -157,11 +158,11 @@ class Login : AppCompatActivity() {
     }
 
     private fun setOnClickViews() {
-        signup!!.setOnClickListener { view: View? ->
+        signup?.setOnClickListener { view: View? ->
             val activitySignup = Intent(this, Signup::class.java)
             startActivity(activitySignup)
         }
-        login!!.setOnClickListener { view: View? -> loginClick() }
+        login!!.setOnClickListener { loginClick() }
     }
 
     private fun initViews() {
@@ -223,7 +224,7 @@ class Login : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putString("id", id)
             val prefs = applicationContext.getSharedPreferences("userPrefs", 0)
-            prefs.edit().putString("idUser", id).commit()
+            prefs.edit().putString("idUser", id).apply()
             successLogin = if (hasNickname()) {
                 Intent(this, MainActivity::class.java)
             } else {

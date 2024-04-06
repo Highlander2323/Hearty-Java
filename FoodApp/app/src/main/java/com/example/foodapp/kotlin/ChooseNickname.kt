@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.foodapp.R
 import java.sql.Connection
 
 class ChooseNickname : AppCompatActivity() {

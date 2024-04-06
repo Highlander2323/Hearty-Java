@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.FoodAppCreate"
     android:background="@drawable/background_wooden"
-    tools:context=".RecipePage">
+    tools:context=".kotlin.RecipePage">
 
     <LinearLayout
         android:id="@+id/recipe_page_main_layout"

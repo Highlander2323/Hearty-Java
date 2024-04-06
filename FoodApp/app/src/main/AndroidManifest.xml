@@ -17,47 +17,47 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".SearchByDiet"
+            android:name=".kotlin.SearchByDiet"
             android:exported="false" />
         <activity
-            android:name=".SearchByIngredients"
+            android:name=".kotlin.SearchByIngredients"
             android:exported="false" />
         <activity
-            android:name=".CookbookPage"
+            android:name=".kotlin.CookbookPage"
             android:exported="false" />
         <activity
-            android:name=".AddIngredientsMod"
+            android:name=".kotlin.AddIngredientsMod"
             android:exported="false" />
         <activity
-            android:name=".RecipePage"
+            android:name=".kotlin.RecipePage"
             android:exported="false" />
         <activity
-            android:name=".AddToCookbook"
+            android:name=".kotlin.AddToCookbook"
             android:exported="false" />
         <activity
-            android:name=".AddIngredients"
+            android:name=".kotlin.AddIngredients"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".kotlin.Profile"
             android:exported="false" />
         <activity
-            android:name=".CreateRecipe"
+            android:name=".kotlin.CreateRecipe"
             android:exported="false"
             android:theme="@style/Theme.FoodAppCreate"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".CreateCookbook"
+            android:name=".kotlin.CreateCookbook"
             android:exported="false"
             android:theme="@style/Theme.FoodAppCreate" />
         <activity
-            android:name=".ChooseNickname"
+            android:name=".kotlin.ChooseNickname"
             android:exported="false" />
         <activity
-            android:name=".Signup"
+            android:name=".kotlin.Signup"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Login"
+            android:name=".kotlin.Login"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -71,7 +71,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".kotlin.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.FoodAppMainWhite">

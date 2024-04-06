@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Context
 import android.content.DialogInterface
@@ -12,6 +12,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.foodapp.R
 import java.sql.Connection
 
 class AddIngredients : AppCompatActivity() {
@@ -27,10 +28,10 @@ class AddIngredients : AppCompatActivity() {
     var txtInfo: TextView? = null
 
     // Dialog box for entering amount when adding new ingredient
-    var dialogAddIngredient = DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
+    var dialogAddIngredient = DialogInterface.OnClickListener { _: DialogInterface?, which: Int ->
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
-                val data: MutableMap<String, String> = HashMap()
+                val data: MutableMap<String?, String?> = HashMap()
                 data["Id"] = id
                 data["Name"] = name
                 data["Amount"] = ButtonChecks.boxIngredientAmount!!.text.toString()
@@ -51,7 +52,7 @@ class AddIngredients : AppCompatActivity() {
     private fun callSearch(search: String) {
         txtInfo!!.text = ""
         searchIngredients!!.adapter = null
-        val data: MutableList<Map<String, String>> = ArrayList()
+        val data: MutableList<Map<String?, String?>> = ArrayList()
         try {
             if (connection != null) {
                 val query = "select ing_id,ing_name from [Ingredient] where ing_name like ?" +
@@ -65,7 +66,7 @@ class AddIngredients : AppCompatActivity() {
                     return
                 }
                 do {
-                    val dtrecipe: MutableMap<String, String> = HashMap()
+                    val dtrecipe: MutableMap<String?, String?> = HashMap()
                     dtrecipe["Id"] = rs.getString("ing_id")
                     dtrecipe["Name"] = rs.getString("ing_name")
                     data.add(dtrecipe)

@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.foodapp.R
 import java.sql.PreparedStatement
 
 class CreateCookbook : AppCompatActivity() {
@@ -55,14 +56,16 @@ class CreateCookbook : AppCompatActivity() {
             if (hasName()) {
                 btnCreate.isEnabled = true
                 btnCreate.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
-                        this, R.color.orange))
+                        this, R.color.orange
+                ))
                 return
             }
         } else {
             if (isChanged) {
                 btnCreate.isEnabled = true
                 btnCreate.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
-                        this, R.color.orange))
+                        this, R.color.orange
+                ))
                 return
             }
         }

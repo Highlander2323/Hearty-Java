@@ -1,11 +1,10 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.foodapp.R
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
@@ -120,7 +120,9 @@ open class Profile : AppCompatActivity() {
         val newName = boxName.text.toString()
         if (newName != nameUser) {
             btnSave.isEnabled = true
-            btnSave.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange))
+            btnSave.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,
+                R.color.orange
+            ))
         }
         nameUser = newName
     }

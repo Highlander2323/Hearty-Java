@@ -7,7 +7,7 @@
     android:theme="@style/Theme.FoodAppCreate"
     android:background="@drawable/background_wooden"
     android:paddingVertical="25dp"
-    tools:context=".CookbookPage">
+    tools:context=".kotlin.CookbookPage">
 
     <LinearLayout
         android:id="@+id/linear_layout_search_ingredients"

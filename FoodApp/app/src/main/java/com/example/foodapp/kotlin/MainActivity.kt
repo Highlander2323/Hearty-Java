@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.foodapp.R
 import com.example.foodapp.databinding.ActivityMainBinding
 import java.sql.Connection
 
@@ -52,11 +53,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goSearch(frg: Fragment) {
-        imgSearch.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.search_selected))
+        imgSearch.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+            R.drawable.search_selected
+        ))
         txtSearch.setTextColor(ContextCompat.getColor(applicationContext, R.color.orange))
         imgRecipes.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.recipe))
         txtRecipes.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
-        imgCooking.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.cooking))
+        imgCooking.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+            R.drawable.cooking
+        ))
         txtCooking.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
         replaceFragment(frg)
     }
@@ -64,9 +69,13 @@ class MainActivity : AppCompatActivity() {
     private fun goRecipes(frg: Fragment) {
         imgSearch.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.search))
         txtSearch.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
-        imgRecipes.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.recipe_selected))
+        imgRecipes.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+            R.drawable.recipe_selected
+        ))
         txtRecipes.setTextColor(ContextCompat.getColor(applicationContext, R.color.orange))
-        imgCooking.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.cooking))
+        imgCooking.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+            R.drawable.cooking
+        ))
         txtCooking.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
         replaceFragment(frg)
     }
@@ -76,7 +85,9 @@ class MainActivity : AppCompatActivity() {
         txtSearch.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
         imgRecipes.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.recipe))
         txtRecipes.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
-        imgCooking.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.cooking_selected))
+        imgCooking.setImageDrawable(ContextCompat.getDrawable(applicationContext,
+            R.drawable.cooking_selected
+        ))
         txtCooking.setTextColor(ContextCompat.getColor(applicationContext, R.color.orange))
         replaceFragment(frg)
     }

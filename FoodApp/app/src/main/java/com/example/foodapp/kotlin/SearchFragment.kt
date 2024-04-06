@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +13,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.foodapp.R
 import java.sql.PreparedStatement
 
 class SearchFragment : Fragment() {

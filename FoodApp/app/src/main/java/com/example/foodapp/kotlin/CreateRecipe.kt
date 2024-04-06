@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.Context
 import android.content.DialogInterface
@@ -20,7 +20,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.foodapp.AddIngredients
+import com.example.foodapp.R
 import java.sql.Connection
 
 class CreateRecipe : AppCompatActivity() {
@@ -70,48 +70,48 @@ class CreateRecipe : AppCompatActivity() {
     }
 
     protected fun initBoxesNull() {
-        btnIngredients!!.text = btnIngredients!!.text.toString() + idIngredients.size
+        btnIngredients.text = btnIngredients.text.toString() + idIngredients.size
         // We initialize AutoCompleteTextViews to null so that user can't use keyboard for them
-        boxPreph!!.inputType = InputType.TYPE_NULL
-        boxPrepm!!.inputType = InputType.TYPE_NULL
-        boxCookh!!.inputType = InputType.TYPE_NULL
-        boxCookm!!.inputType = InputType.TYPE_NULL
-        boxServings!!.inputType = InputType.TYPE_NULL
+        boxPreph.inputType = InputType.TYPE_NULL
+        boxPrepm.inputType = InputType.TYPE_NULL
+        boxCookh.inputType = InputType.TYPE_NULL
+        boxCookm.inputType = InputType.TYPE_NULL
+        boxServings.inputType = InputType.TYPE_NULL
     }
 
     private fun hasName(): Boolean {
-        return boxName!!.text.toString() != ""
+        return boxName.text.toString() != ""
     }
 
     private fun setOnTextChanged() {
-        boxName!!.addTextChangedListener(object : TextWatcher {
+        boxName.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, aft: Int) {}
             override fun afterTextChanged(s: Editable) {
                 // this will show characters remaining
                 if (s.toString().length > 35) {
-                    txtNameCharLimit!!.text = s.toString().length.toString() + "/50"
+                    txtNameCharLimit.text = s.toString().length.toString() + "/50"
                 } else {
-                    txtNameCharLimit!!.text = ""
+                    txtNameCharLimit.text = ""
                 }
             }
         })
-        boxDirections!!.addTextChangedListener(object : TextWatcher {
+        boxDirections.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, aft: Int) {}
             override fun afterTextChanged(s: Editable) {
                 // this will show characters remaining
                 if (s.toString().length > 1350) {
-                    txtDirectionsCharLimit!!.text = s.toString().length.toString() + "/1500"
+                    txtDirectionsCharLimit.text = s.toString().length.toString() + "/1500"
                 } else {
-                    txtDirectionsCharLimit!!.text = ""
+                    txtDirectionsCharLimit.text = ""
                 }
             }
         })
     }
 
     private fun hasDirections(): Boolean {
-        return if (boxDirections!!.text.toString() == "") {
+        return if (boxDirections.text.toString() == "") {
             false
         } else true
     }
@@ -120,14 +120,15 @@ class CreateRecipe : AppCompatActivity() {
     private fun checkFields() {
         if (hasName()) {
             if (hasDirections()) if (idIngredients.size >= 3) {
-                btnCreate!!.isEnabled = true
-                btnCreate!!.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
-                        this, R.color.orange))
+                btnCreate.isEnabled = true
+                btnCreate.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+                        this, R.color.orange
+                ))
                 return
             }
         }
-        btnCreate!!.isEnabled = false
-        btnCreate!!.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#66000000"))
+        btnCreate.isEnabled = false
+        btnCreate.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#66000000"))
     }
 
     private fun onTextChange(box: EditText?) {
@@ -148,18 +149,18 @@ class CreateRecipe : AppCompatActivity() {
         try {
             val db = ConnectionDB()
             connection = db.connect()
-            val preptime = (boxPreph!!.text.toString().toInt() * 60
-                    + boxPrepm!!.text.toString().toInt())
-            val cooktime = boxCookh!!.text.toString().toInt() * 60 + boxCookm!!.text.toString().toInt()
+            val preptime = (boxPreph.text.toString().toInt() * 60
+                    + boxPrepm.text.toString().toInt())
+            val cooktime = boxCookh.text.toString().toInt() * 60 + boxCookm.text.toString().toInt()
             var query = "insert into dbo.Recipe(recipe_name, recipe_directions," +
                     " recipe_prep_time, recipe_cook_time, recipe_servings," +
                     " recipe_account_id) values(?,?,?,?,?,?)"
             var ps = connection!!.prepareStatement(query)
-            ps.setString(1, boxName!!.text.toString())
-            ps.setString(2, boxDirections!!.text.toString())
-            ps.setString(3, Integer.toString(preptime))
-            ps.setString(4, Integer.toString(cooktime))
-            ps.setString(5, boxServings!!.text.toString())
+            ps.setString(1, boxName.text.toString())
+            ps.setString(2, boxDirections.text.toString())
+            ps.setString(3, preptime.toString())
+            ps.setString(4, cooktime.toString())
+            ps.setString(5, boxServings.text.toString())
             ps.setString(6, idUser)
             ps.execute()
             query = "select IDENT_CURRENT(?)"
@@ -176,7 +177,7 @@ class CreateRecipe : AppCompatActivity() {
                 ps.setString(3, idIngredients[i]["Amount"])
                 ps.execute()
             }
-            val check = CheckDiets(idIngredients, connection, boxServings!!.text.toString().toInt(), recipeId)
+            val check = CheckDiets(idIngredients, connection, boxServings.text.toString().toInt(), recipeId)
             check.calculateValues()
             check.checkDiets()
             connection!!.close()
@@ -194,7 +195,7 @@ class CreateRecipe : AppCompatActivity() {
     }
 
     // Are you sure you want to cancel dialog box initializing
-    var dialogClickListener = DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
+    var dialogClickListener = DialogInterface.OnClickListener { _: DialogInterface?, which: Int ->
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
                 val prefs = applicationContext.getSharedPreferences("recipeDetails", MODE_PRIVATE)
@@ -218,13 +219,13 @@ class CreateRecipe : AppCompatActivity() {
     protected fun onClickBtnIngredients() {
         val goIngredients = Intent(this, AddIngredients::class.java)
         val prefs = applicationContext.getSharedPreferences("recipeDetails", 0)
-        prefs.edit().putString("recipeName", boxName!!.text.toString()).commit()
-        prefs.edit().putString("recipeDirections", boxDirections!!.text.toString()).commit()
-        prefs.edit().putString("prepH", boxPreph!!.text.toString()).commit()
-        prefs.edit().putString("prepM", boxPrepm!!.text.toString()).commit()
-        prefs.edit().putString("cookH", boxCookh!!.text.toString()).commit()
-        prefs.edit().putString("cookM", boxCookm!!.text.toString()).commit()
-        prefs.edit().putString("servings", boxServings!!.text.toString()).commit()
+        prefs.edit().putString("recipeName", boxName.text.toString()).apply()
+        prefs.edit().putString("recipeDirections", boxDirections.text.toString()).apply()
+        prefs.edit().putString("prepH", boxPreph.text.toString()).apply()
+        prefs.edit().putString("prepM", boxPrepm.text.toString()).apply()
+        prefs.edit().putString("cookH", boxCookh.text.toString()).apply()
+        prefs.edit().putString("cookM", boxCookm.text.toString()).apply()
+        prefs.edit().putString("servings", boxServings.text.toString()).apply()
         startActivity(goIngredients)
         finish()
     }
@@ -233,32 +234,32 @@ class CreateRecipe : AppCompatActivity() {
         val adapterHours = ArrayAdapter(this, android.R.layout.simple_list_item_1, timesHours)
         val adapterMinutes = ArrayAdapter(this, android.R.layout.simple_list_item_1, timesMinutes)
         val adapterServings = ArrayAdapter(this, android.R.layout.simple_list_item_1, servingsChoices)
-        boxPreph!!.setAdapter(adapterHours)
-        boxPrepm!!.setAdapter(adapterMinutes)
-        boxCookh!!.setAdapter(adapterHours)
-        boxCookm!!.setAdapter(adapterMinutes)
-        boxServings!!.setAdapter(adapterServings)
+        boxPreph.setAdapter(adapterHours)
+        boxPrepm.setAdapter(adapterMinutes)
+        boxCookh.setAdapter(adapterHours)
+        boxCookm.setAdapter(adapterMinutes)
+        boxServings.setAdapter(adapterServings)
     }
 
     // For each AutoCompleteTextView, we set a listener for OnFocusChange and OnClick, because
     // we want to display the choices everytime the user taps on the boxes; additionally,
     // we set a OnClickListener for buttons, so we can run the proper function for each button;
     protected fun setOnClickViews() {
-        boxPreph!!.onFocusChangeListener = OnFocusChangeListener { view: View?, b: Boolean -> boxPreph!!.showDropDown() }
-        boxPreph!!.setOnClickListener { view: View? -> boxPreph!!.showDropDown() }
-        boxPrepm!!.onFocusChangeListener = OnFocusChangeListener { view: View?, b: Boolean -> boxPrepm!!.showDropDown() }
-        boxPrepm!!.setOnClickListener { view: View? -> boxPrepm!!.showDropDown() }
-        boxCookh!!.onFocusChangeListener = OnFocusChangeListener { view: View?, b: Boolean -> boxCookh!!.showDropDown() }
-        boxCookh!!.setOnClickListener { view: View? -> boxCookh!!.showDropDown() }
-        boxCookm!!.onFocusChangeListener = OnFocusChangeListener { view: View?, b: Boolean -> boxCookm!!.showDropDown() }
-        boxCookm!!.setOnClickListener { view: View? -> boxCookm!!.showDropDown() }
-        boxServings!!.onFocusChangeListener = OnFocusChangeListener { view: View?, b: Boolean -> boxServings!!.showDropDown() }
-        boxServings!!.setOnClickListener { view: View? -> boxServings!!.showDropDown() }
+        boxPreph.onFocusChangeListener = OnFocusChangeListener { _: View?, _: Boolean -> boxPreph.showDropDown() }
+        boxPreph.setOnClickListener { boxPreph.showDropDown() }
+        boxPrepm.onFocusChangeListener = OnFocusChangeListener { _: View?, _: Boolean -> boxPrepm.showDropDown() }
+        boxPrepm.setOnClickListener { boxPrepm.showDropDown() }
+        boxCookh.onFocusChangeListener = OnFocusChangeListener { _: View?, _: Boolean -> boxCookh.showDropDown() }
+        boxCookh.setOnClickListener { boxCookh.showDropDown() }
+        boxCookm.onFocusChangeListener = OnFocusChangeListener { _: View?, _: Boolean -> boxCookm.showDropDown() }
+        boxCookm.setOnClickListener { boxCookm.showDropDown() }
+        boxServings.onFocusChangeListener = OnFocusChangeListener { _: View?, _: Boolean -> boxServings.showDropDown() }
+        boxServings.setOnClickListener { boxServings.showDropDown() }
         onTextChange(boxName)
         onTextChange(boxDirections)
-        btnCancel!!.setOnClickListener { view: View? -> onClickBtnCancel(this) }
-        btnCreate!!.setOnClickListener { view: View? -> onClickBtnCreate() }
-        btnIngredients!!.setOnClickListener { view: View? -> onClickBtnIngredients() }
+        btnCancel.setOnClickListener { onClickBtnCancel(this) }
+        btnCreate.setOnClickListener { onClickBtnCreate() }
+        btnIngredients.setOnClickListener { onClickBtnIngredients() }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -293,6 +294,6 @@ class CreateRecipe : AppCompatActivity() {
                 "08", "09", "10", "11", "12")
         private val timesMinutes = arrayOf("00", "05", "10", "15", "20", "25", "30", "35",
                 "40", "45", "50", "55")
-        var idIngredients: MutableList<MutableMap<String, String>> = ArrayList()
+        var idIngredients: MutableList<MutableMap<String?, String?>> = ArrayList()
     }
 }

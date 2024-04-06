@@ -1,13 +1,11 @@
-package com.example.foodapp
+package com.example.foodapp.kotlin
 
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ListView
 import android.widget.PopupMenu
@@ -15,6 +13,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.foodapp.R
 import java.sql.PreparedStatement
 
 class CookbookPage : AppCompatActivity() {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_nickname"
-    tools:context=".SearchByDiet">
+    tools:context=".kotlin.SearchByDiet">
 
     <LinearLayout
         android:id="@+id/search_by_diet_linear_layout"

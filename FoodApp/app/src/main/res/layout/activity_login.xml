@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/orange"
     android:layout_weight="1"
-    tools:context=".Login">
+    tools:context=".kotlin.Login">
 
     <ImageView android:id="@+id/login_art"
         android:layout_width="match_parent"
